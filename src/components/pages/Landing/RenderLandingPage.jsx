@@ -12,7 +12,7 @@ import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 
 // for the purposes of testing PageNav
-// import PageNav from '../../common/PageNav';
+import PageNav from '../../common/PageNav';
 
 function RenderLandingPage(props) {
   const scrollToTop = () => {
@@ -42,7 +42,7 @@ function RenderLandingPage(props) {
           To-do: 
           - Styling
           - Spell/Grammar check
-          - test diff node version
+          - Test diff node version
       */}
       <div className="graphs-section">
         <div className="graph-container">
@@ -51,7 +51,9 @@ function RenderLandingPage(props) {
             alt="Grant Rates By Office"
             className="bar-img"
           />
-          <div>Search Grant Rates By Office</div>
+          <div className="graph-container-text">
+            Search Grant Rates By Office
+          </div>
         </div>
         <div className="graph-container">
           <img
@@ -59,7 +61,9 @@ function RenderLandingPage(props) {
             alt="Grant Rates By Nationality"
             className="pie-img"
           />
-          <div>Search Grant Rates By Nationality</div>
+          <div className="graph-container-text">
+            Search Grant Rates By Nationality
+          </div>
         </div>
         <div className="graph-container">
           <img
@@ -67,14 +71,20 @@ function RenderLandingPage(props) {
             alt="Grant Rates Over Time"
             className="line-img"
           />
-          <div>Search Grant Rates Over Time</div>
+          <div className="graph-container-text">
+            Search Grant Rates Over Time
+          </div>
         </div>
       </div>
 
       <div className="view-more-data-btn-container">
         <Button
           type="default"
-          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+          style={{
+            backgroundColor: '#404C4A',
+            color: '#FFFFFF',
+            margin: '10%',
+          }}
           onClick={() => history.push('/graphs')}
         >
           View the Data
@@ -83,7 +93,11 @@ function RenderLandingPage(props) {
         {/* Need to clarify and adjust fucntionality, download data or point somewhere */}
         <Button
           type="default"
-          style={{ backgroundColor: '#404C4A', color: '#FFFFFF' }}
+          style={{
+            backgroundColor: '#404C4A',
+            color: '#FFFFFF',
+            margin: '10%',
+          }}
           onClick={() => history.push('/graphs')}
         >
           Download the Data
