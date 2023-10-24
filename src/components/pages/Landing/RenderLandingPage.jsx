@@ -39,9 +39,10 @@ function RenderLandingPage(props) {
       {/* <div className="graphs-section"> */}
 
       {/* 
-          To-do:
-          - Spell/Grammar check
-          - Check fonts
+          Top Section Completed 
+            
+            Notes
+            - Unclear what destination is for 'Download the Data' CTA.
       */}
       <div className="graphs-section">
         <div className="graph-container">
@@ -75,7 +76,6 @@ function RenderLandingPage(props) {
           </div>
         </div>
       </div>
-
       <div className="view-more-data-btn-container">
         <Button
           type="default"
@@ -88,8 +88,6 @@ function RenderLandingPage(props) {
         >
           View the Data
         </Button>
-
-        {/* Need to clarify and adjust fucntionality, download data or point somewhere */}
         <Button
           type="default"
           style={{
@@ -122,13 +120,11 @@ function RenderLandingPage(props) {
       <div>
         {/* Bottom Section: Add code here for the graphs section for your first ticket */}
         {/* <div className="bottom-section">*/}
-
-        {/* To-do: 
-            - Styling, may need to adjust classNames 
-            - Update 'Read More' button link destination
-            - Spell + Grammar Check blurbs
-            - May need to add class names to blurbs
-            - Check fonts
+        {/* 
+            Bottom Section Completed 
+            
+            Notes
+            - Unclear what destination is for 'Read More' CTA.
         */}
         <div className="bottom-section">
           <div className="bottom-section-header">
@@ -140,14 +136,14 @@ function RenderLandingPage(props) {
               <div className="bottom-section-stat-header">36%</div>
               <div className="bottom-section-stat-text">
                 By the end of the Trump administration, the average asylum
-                office Grant rate had fallen 36 percent from an average of 44
+                office grant rate had fallen 36 percent from an average of 44
                 percent in fiscal year 2016 to 28 percent in fiscal year 2020.
               </div>
             </div>
             <div className="bottom-section-single-stat">
               <div className="bottom-section-stat-header">5%</div>
               <div className="bottom-section-stat-text">
-                The New York assylum office grant rate dropped 5 percent in
+                The New York assylum office grant rate dropped to 5 percent in
                 fiscal year 2020.
               </div>
             </div>
