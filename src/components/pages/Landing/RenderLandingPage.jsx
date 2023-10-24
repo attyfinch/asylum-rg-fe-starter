@@ -130,7 +130,6 @@ function RenderLandingPage(props) {
           <div className="bottom-section-header">
             Systemic Disparity Insights
           </div>
-
           <div className="bottom-section-stats">
             <div className="bottom-section-single-stat">
               <div className="bottom-section-stat-header">36%</div>
