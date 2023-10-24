@@ -39,7 +39,7 @@ function RenderLandingPage(props) {
       {/* <div className="graphs-section"> */}
 
       {/* 
-          Top Section Completed 
+          Graph Section Completed 
             
             Notes
             - Unclear what destination is for 'Download the Data' CTA.
@@ -165,7 +165,6 @@ function RenderLandingPage(props) {
               Read More
             </Button>
           </div>
-          {/* Update link destination */}
         </div>
         <p onClick={() => scrollToTop()} className="back-to-top">
           Back To Top ^
