@@ -7,6 +7,8 @@ import {
   SET_CONTINENT_FILTER,
   SET_GEOPOLITICAL_FILTER,
 } from '../actionTypes';
+
+// This is creating an error, doesn't look like it exists.
 import {
   regions,
   officeRegions,
@@ -15,11 +17,11 @@ import {
 } from '../../data/filterConstants';
 
 const initialState = {
-  isFiscalYear: false,
-  asylumOffice: [],
-  region: [],
-  continents: [],
-  geopolitical: [],
+  isFiscalYear: false, // determines API endpoint, trend or citizenship
+  asylumOffice: [], // office view variable
+  region: [], // set by deriveRegion() function below
+  continents: [], // deriveRegion()
+  geopolitical: [], // deriveRegion()
 };
 
 const filterReducer = (state = initialState, action) => {

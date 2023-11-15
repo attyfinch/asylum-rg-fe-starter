@@ -63,10 +63,12 @@ function YearLimitsSelect(props) {
   //       e.target.value
   //     ));
   // };
-  const stateSettingFn = (view, office, data) => {
+
+  const stateSettingFn = data => {
     const plotlyReadyData = rawApiDataToPlotlyReadyInfo(view, office, data);
     dispatch(setVisualizationData(view, office, plotlyReadyData));
   };
+
   const [form] = Form.useForm();
   useInterval(() => {
     form.setFieldsValue({
@@ -76,7 +78,7 @@ function YearLimitsSelect(props) {
   }, 10);
 
   useEffect(() => {
-    updateStateWithNewData(years, view, office, stateSettingFn);
+    updateStateWithNewData(stateSettingFn);
   });
 
   return (

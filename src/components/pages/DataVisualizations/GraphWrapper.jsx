@@ -1,16 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
+// from Graphs folder
 import CitizenshipMapAll from './Graphs/CitizenshipMapAll';
 import CitizenshipMapSingleOffice from './Graphs/CitizenshipMapSingleOffice';
 import TimeSeriesAll from './Graphs/TimeSeriesAll';
 import OfficeHeatMap from './Graphs/OfficeHeatMap';
 import TimeSeriesSingleOffice from './Graphs/TimeSeriesSingleOffice';
+
+// Update/Clear Query Buttons
 import YearLimitsSelect from './YearLimitsSelect';
+
+// 3 buttons that select graph type, determines view
 import ViewSelect from './ViewSelect';
-import axios from 'axios';
+
+// Action Creator that resets viz query
 import { resetVisualizationQuery } from '../../../state/actionCreators';
+
+// Test Data - I will be replacing this with the API
 import test_data from '../../../data/test_data.json';
+
+// Utility + Styles
 import { colors } from '../../../styles/data_vis_colors';
 import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
@@ -50,65 +62,51 @@ function GraphWrapper(props) {
         break;
     }
   }
-  function updateStateWithNewData(years, view, office, stateSettingCallback) {
-    /*
-          _                                                                             _
-        |                                                                                 |
-        |   Example request for once the `/summary` endpoint is up and running:           |
-        |                                                                                 |
-        |     `${url}/summary?to=2022&from=2015&office=ZLA`                               |
-        |                                                                                 |
-        |     so in axios we will say:                                                    |
-        |                                                                                 |     
-        |       axios.get(`${url}/summary`, {                                             |
-        |         params: {                                                               |
-        |           from: <year_start>,                                                   |
-        |           to: <year_end>,                                                       |
-        |           office: <office>,       [ <-- this one is optional! when    ]         |
-        |         },                        [ querying by `all offices` there's ]         |
-        |       })                          [ no `office` param in the query    ]         |
-        |                                                                                 |
-          _                                                                             _
-                                   -- Mack 
-    
-    */
 
-    if (office === 'all' || !office) {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-          },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
-    } else {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
-        })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
-        });
+  /*
+    API Call Helper Function
+    I made this modular so that it's easy to incorporate new endpoints as they
+    are built. 
+  */
+
+  async function fetchAsylumData(type) {
+    const res = await axios.get(
+      `https://hrf-asylum-be-b.herokuapp.com/cases/${type}`
+    );
+    return res.data;
+  }
+
+  /*
+    I updated this function to make it async to allow for simultaneous API calls.
+    New data can easily be added using the fetchAsylumData helper function by simply
+    adding additional calls.
+
+    Notes:
+    - I removed the years, view, and office arguments b/c they are not needed for 
+      the app to function.
+  */
+
+  async function updateStateWithNewData(stateSettingCallback) {
+    try {
+      const [fiscalData, citizenshipData] = await Promise.all([
+        fetchAsylumData('fiscalSummary'),
+        fetchAsylumData('citizenshipSummary'),
+      ]);
+      // This callback function sends the data to state (via the YearLimitsSelect component)
+      // Note the shape of the data, this is important and will break if not formatted correctly.
+      stateSettingCallback([
+        { ...fiscalData, citizenshipResults: citizenshipData },
+      ]);
+      return [{ ...fiscalData, citizenshipResults: citizenshipData }];
+    } catch (error) {
+      console.error('Error:', error);
     }
   }
+
   const clearQuery = (view, office) => {
     dispatch(resetVisualizationQuery(view, office));
   };
+
   return (
     <div
       className="map-wrapper-container"
@@ -143,5 +141,4 @@ function GraphWrapper(props) {
     </div>
   );
 }
-
-export default connect()(GraphWrapper);
+export default connect(null, {})(GraphWrapper);
