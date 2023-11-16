@@ -97,7 +97,6 @@ function GraphWrapper(props) {
       stateSettingCallback([
         { ...fiscalData, citizenshipResults: citizenshipData },
       ]);
-      return [{ ...fiscalData, citizenshipResults: citizenshipData }];
     } catch (error) {
       console.error('Error:', error);
     }
