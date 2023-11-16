@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-// from Graphs folder
+// from Data Vis/charts components
 import CitizenshipMapAll from './Graphs/CitizenshipMapAll';
 import CitizenshipMapSingleOffice from './Graphs/CitizenshipMapSingleOffice';
 import TimeSeriesAll from './Graphs/TimeSeriesAll';
@@ -13,7 +13,7 @@ import TimeSeriesSingleOffice from './Graphs/TimeSeriesSingleOffice';
 // Update/Clear Query Buttons
 import YearLimitsSelect from './YearLimitsSelect';
 
-// 3 buttons that select graph type, determines view
+// Graph selection buttons (3) determines view
 import ViewSelect from './ViewSelect';
 
 // Action Creator that resets viz query
@@ -82,7 +82,7 @@ function GraphWrapper(props) {
     adding additional calls.
 
     Notes:
-    - I removed the years, view, and office arguments b/c they are not needed for 
+    - Years, view, and office arguments removed b/c they are not needed for 
       the app to function.
   */
 
