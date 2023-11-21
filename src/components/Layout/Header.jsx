@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom';
 import Logo from '../../styles/Images/WhiteLogo.png';
 import { colors } from '../../styles/data_vis_colors';
 
+import LoginButton from '../../auth/buttons/login-button';
+import SignupButton from '../../auth/buttons/signup-button';
+import LogoutButton from '../../auth/buttons/logout-button';
+import AuthenticationButton from '../../auth/buttons/authentication-button';
+
 const { primary_accent_color } = colors;
 
 function HeaderContent() {
@@ -28,6 +33,8 @@ function HeaderContent() {
         <Link to="/graphs" style={{ color: '#E2F0F7' }}>
           Graphs
         </Link>
+
+        <AuthenticationButton />
       </div>
     </div>
   );
