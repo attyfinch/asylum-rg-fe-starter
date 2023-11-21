@@ -33,7 +33,9 @@ function HeaderContent() {
         <Link to="/graphs" style={{ color: '#E2F0F7' }}>
           Graphs
         </Link>
-
+        <Link to="/profile" style={{ color: '#E2F0F7' }}>
+          Profile
+        </Link>
         <AuthenticationButton />
       </div>
     </div>
