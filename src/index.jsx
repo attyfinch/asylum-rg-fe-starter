@@ -12,11 +12,15 @@ import 'antd/dist/antd.less';
 import { NotFoundPage } from './components/pages/NotFound';
 import { LandingPage } from './components/pages/Landing';
 import ProfilePage from './components/pages/ProfilePage';
+import Loading from './components/common/Loading';
+import ProtectedRoute from './auth/protected-route';
 
 import { FooterContent, SubFooter } from './components/Layout/Footer';
 import { HeaderContent } from './components/Layout/Header';
 
 // import { TablePage } from './components/pages/Table';
+
+import { useAuth0 } from '@auth0/auth0-react';
 
 import { Layout } from 'antd';
 import GraphsContainer from './components/pages/DataVisualizations/GraphsContainer';
@@ -43,6 +47,12 @@ ReactDOM.render(
 
 export function App() {
   const { Footer, Header } = Layout;
+  const { isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <Layout>
       <Header
@@ -58,9 +68,10 @@ export function App() {
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path="/graphs" component={GraphsContainer} />
-        <Route path="/profile" component={ProfilePage} />
+        <ProtectedRoute path="/profile" component={ProfilePage} />
         <Route component={NotFoundPage} />
       </Switch>
+
       <Footer
         style={{
           backgroundColor: primary_accent_color,

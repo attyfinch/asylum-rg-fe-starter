@@ -4,10 +4,9 @@ import { Link } from 'react-router-dom';
 import Logo from '../../styles/Images/WhiteLogo.png';
 import { colors } from '../../styles/data_vis_colors';
 
-import LoginButton from '../../auth/buttons/login-button';
-import SignupButton from '../../auth/buttons/signup-button';
-import LogoutButton from '../../auth/buttons/logout-button';
-import AuthenticationButton from '../../auth/buttons/authentication-button';
+// Components conditionally render Login/Logout and Profile Link/Signup button based on auth status
+import AuthenticationButton from '../../auth/authentication-button';
+import AuthenticationNav from '../../auth/authenicated-nav';
 
 const { primary_accent_color } = colors;
 
@@ -17,6 +16,7 @@ function HeaderContent() {
       style={{
         display: 'flex',
         justifyContent: 'space-between',
+        alignItems: 'center',
         width: '100%',
         backgroundColor: primary_accent_color,
       }}
@@ -26,16 +26,14 @@ function HeaderContent() {
           <Image width={100} src={Logo} preview={false} alt="HRF logo white" />
         </a>
       </div>
-      <div>
-        <Link to="/" style={{ color: '#E2F0F7', paddingRight: '75px' }}>
+      <div className="navBox">
+        <Link to="/" style={{ color: '#FFFFFF', paddingRight: '50px' }}>
           Home
         </Link>
-        <Link to="/graphs" style={{ color: '#E2F0F7' }}>
+        <Link to="/graphs" style={{ color: '#FFFFFF', paddingRight: '50px' }}>
           Graphs
         </Link>
-        <Link to="/profile" style={{ color: '#E2F0F7' }}>
-          Profile
-        </Link>
+        <AuthenticationNav />
         <AuthenticationButton />
       </div>
     </div>
